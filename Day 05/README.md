@@ -9,34 +9,34 @@ This project uses RapidAPI to fetch NCAA game highlights in a Docker container a
 
 Manages environment variables by importing and assigning values, providing defaults where needed. This enables flexible configuration for different environments like development, staging, or production without changing the source code.
 
-# fetch.py
+## fetch.py
 
 Defines the date and league (NCAA in this case) to retrieve highlights from the API. It stores the highlights in an S3 bucket as a JSON file (e.g., basketball_highlight.json).
 
-# process_one_video.py 
+## process_one_video.py 
 
 This script retrieves the JSON file from the S3 bucket, extracts the first video URL, downloads the video, and stores it in a new S3 location (videos/). It also logs each step's status.
 
-# mediaconvert_process.py 
+## mediaconvert_process.py 
 
 Submits a job to AWS MediaConvert, processes the video (adjusting codec, resolution, bitrate, and audio settings), and saves the processed video to an S3 bucket.
 
-# run_all.py 
+## run_all.py 
 
 Executes all scripts in order, with buffer time between tasks for proper execution.
 
-# .env file 
+## .env file 
 
 Contains environment variables to avoid hardcoding sensitive data in the scripts.
 
-# Dockerfile 
+## Dockerfile 
 
 Defines the steps to build the Docker image for the project.
 
-# Terraform Scripts
+## Terraform Scripts
 Automate the creation of AWS resources (e.g., S3, IAM roles, ECS, ECR) in a scalable and repeatable manner.
 
-# Prerequisites
+## Prerequisites
 Before running the scripts, ensure you have the following:
 
 ## **1** Create Rapidapi Account
