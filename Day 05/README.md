@@ -5,7 +5,7 @@ This project uses RapidAPI to fetch NCAA game highlights in a Docker container a
 
 # File Overview
 
-# config.py
+## config.py
 
 Manages environment variables by importing and assigning values, providing defaults where needed. This enables flexible configuration for different environments like development, staging, or production without changing the source code.
 
