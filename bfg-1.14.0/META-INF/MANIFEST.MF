@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Implementation-Title: bfg
+Main-Class-After-UseNewerJava-Check: com.madgag.git.bfg.cli.Main
+Implementation-Version: 1.14.0
+Specification-Vendor: com.madgag
+Specification-Title: bfg
+Implementation-Vendor-Id: com.madgag
+Specification-Version: 1.14.0
+Implementation-URL: https://github.com/rtyley/bfg-repo-cleaner
+Main-Class: use.newer.java.Version8
+Implementation-Vendor: com.madgag
+
