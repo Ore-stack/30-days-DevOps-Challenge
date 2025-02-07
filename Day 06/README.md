@@ -10,7 +10,7 @@ Rapidapi.com account, will be needed to access highlight images and videos.
 For this example we will be using NCAA (USA College Basketball) highlights since it's included for free in the basic plan.
 [Sports Highlights API](https://rapidapi.com/highlightly-api-highlightly-api-default/api/sport-highlights-api/playground/apiendpoint_16dd5813-39c6-43f0-aebe-11f891fe5149) is the endpoint we will be using 
 
-## **2** Verify prerequites are installed 
+## **2**. Verify prerequites are installed 
 
 Docker should be pre-installed in most regions docker --version
 
@@ -21,11 +21,11 @@ Python3 should be pre-installed also python3 --version
 Install gettext package - envsubst is a command-line utility is used for environment variable substituition in shell scripts and text files.
 [Install Steps](https://www.drupal.org/docs/8/modules/potion/how-to-install-setup-gettext)
 
-## **3** Retrieve AWS Account ID
+## **3**. Retrieve AWS Account ID
 
 Copy your AWS Account ID Once logged in to the AWS Management Console Click on your account name in the top right corner You will see your account ID Copy and save this somewhere safe because you will need to update codes in the labs later
 
-## **4** Retrieve Access Keys and Secret Access Keys
+## **4**. Retrieve Access Keys and Secret Access Keys
 You can check to see if you have an access key in the IAM dashboard
 Under Users, click on a user and then "Security Credentials"
 Scroll down until you see the Access Key section
