@@ -4,7 +4,7 @@ BackupHighlights automates fetching sports highlights, stores data in S3 and Dyn
 # Prerequisites
 Before running the scripts, ensure you have the following:
 
-## **1** Create Rapidapi Account
+## **1**. Create Rapidapi Account
 Rapidapi.com account, will be needed to access highlight images and videos.
 
 For this example we will be using NCAA (USA College Basketball) highlights since it's included for free in the basic plan.
@@ -36,7 +36,7 @@ You will not be able to retrieve your secret access key so if you don't have tha
 # START HERE 
 ## **Step 1: Clone The Repo**
 ```bash
-git clone https://github.com/alahl1/SportsDataBackup
+git clone https://github.com/Ore-stack/30-days-DevOps-Challenge.git
 cd src
 ```
 
