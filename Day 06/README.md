@@ -4,13 +4,13 @@ BackupHighlights automates fetching sports highlights, stores data in S3 and Dyn
 # Prerequisites
 Before running the scripts, ensure you have the following:
 
-## **1** Create Rapidapi Account
+## **1**. Create Rapidapi Account
 Rapidapi.com account, will be needed to access highlight images and videos.
 
 For this example we will be using NCAA (USA College Basketball) highlights since it's included for free in the basic plan.
 [Sports Highlights API](https://rapidapi.com/highlightly-api-highlightly-api-default/api/sport-highlights-api/playground/apiendpoint_16dd5813-39c6-43f0-aebe-11f891fe5149) is the endpoint we will be using 
 
-## **2** Verify prerequites are installed 
+## **2**. Verify prerequites are installed 
 
 Docker should be pre-installed in most regions docker --version
 
@@ -21,11 +21,11 @@ Python3 should be pre-installed also python3 --version
 Install gettext package - envsubst is a command-line utility is used for environment variable substituition in shell scripts and text files.
 [Install Steps](https://www.drupal.org/docs/8/modules/potion/how-to-install-setup-gettext)
 
-## **3** Retrieve AWS Account ID
+## **3**. Retrieve AWS Account ID
 
 Copy your AWS Account ID Once logged in to the AWS Management Console Click on your account name in the top right corner You will see your account ID Copy and save this somewhere safe because you will need to update codes in the labs later
 
-## **4** Retrieve Access Keys and Secret Access Keys
+## **4**. Retrieve Access Keys and Secret Access Keys
 You can check to see if you have an access key in the IAM dashboard
 Under Users, click on a user and then "Security Credentials"
 Scroll down until you see the Access Key section
@@ -36,7 +36,7 @@ You will not be able to retrieve your secret access key so if you don't have tha
 # START HERE 
 ## **Step 1: Clone The Repo**
 ```bash
-git clone https://github.com/alahl1/SportsDataBackup
+git clone https://github.com/Ore-stack/30-days-DevOps-Challenge.git
 cd src
 ```
 
@@ -97,7 +97,7 @@ envsubst < ecsTarget.template.json > ecsTarget.json
 ```bash
 envsubst < ecseventsrole-policy.template.json > ecseventsrole-policy.json
 ```
-*Optional - Open the gnerated files using cat or a text editor to confirm that all place holders have been correctly replaced
+*Optional - Open the generated files using cat or a text editor to confirm that all place holders have been correctly replaced
 
 ## **Step 5: Build and Push Docker Image**
 1. Create an ECR Repo
@@ -106,7 +106,7 @@ aws ecr create-repository --repository-name sports-backup
 ```
 2.Log In To ECR
 ```bash
-aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+aws ecr get-login-password --region <AWS_REGION> | docker login --username AWS --password-stdin <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com
 ```
 3. Build the Docker Image
 ```bash
@@ -114,20 +114,20 @@ docker build -t sports-backup .
 ```
 4.Tag the Image for ECR
 ```bash
-docker tag sports-backup:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/sports-backup:latest
+docker tag sports-backup:latest <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/sports-backup:latest
 ```
 5. Push the Image
 ```bash
-docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/sports-backup:latest
+docker push <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com/sports-backup:latest
 ```
 ## **Step 6: Create AWS Resources**
 1. Register the ECS Task Definition
 ```bash
-aws ecs register-task-definition --cli-input-json file://taskdef.json --region ${AWS_REGION}
+aws ecs register-task-definition --cli-input-json file://taskdef.json --region <AWS_REGION>
 ```
 2. Create the CloudWatch Logs Group
 ```bash
-aws logs create-log-group --log-group-name "${AWS_LOGS_GROUP}" --region ${AWS_REGION}
+aws logs create-log-group --log-group-name "<AWS_LOGS_GROUP>" --region <AWS_REGION>
 ```
 3. Attach the S3/DynamoDB Policy to the ECS Task Execution Role
 ```bash
@@ -149,11 +149,11 @@ aws iam put-role-policy --role-name ecsEventsRole --policy-name ecsEventsPolicy 
 ## **Step 7: Create an EventBridge Rule to Schedule the Task**
 1. Create the Rule
 ```bash
-aws events put-rule --name SportsBackupScheduleRule --schedule-expression "rate(1 day)" --region ${AWS_REGION}
+aws events put-rule --name SportsBackupScheduleRule --schedule-expression "rate(1 day)" --region <AWS_REGION>
 ```
 2. Add the Target
 ```bash
-aws events put-targets --rule SportsBackupScheduleRule --targets file://ecsTarget.json --region ${AWS_REGION}
+aws events put-targets --rule SportsBackupScheduleRule --targets file://ecsTarget.json --region <AWS_REGION>
 ```
 ## **Step 8: Manually Test ECS Task**
 ```bash
@@ -161,8 +161,8 @@ aws ecs run-task \
   --cluster sports-backup-cluster \
   --launch-type Fargate \
   --task-definition ${TASK_FAMILY} \
-  --network-configuration "awsvpcConfiguration={subnets=[\"${SUBNET_ID}\"],securityGroups=[\"${SECURITY_GROUP_ID}\"],assignPublicIp=\"ENABLED\"}" \
-  --region ${AWS_REGION}
+  --network-configuration "awsvpcConfiguration={subnets=[\"<SUBNET_ID>\"],securityGroups=[\"<SECURITY_GROUP_ID>\"],assignPublicIp=\"ENABLED\"}" \
+  --region <AWS_REGION>
 ```
 ### **What We Learned**
 1. Using templates to generate json files
